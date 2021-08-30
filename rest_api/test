@@ -1,0 +1,35 @@
+/**
+   * @var \DateTime
+   * @ORM\Column(type="datetime", name="inscription", nullable=false)
+   */
+    protected $inscriptionDate;
+
+    
+    public function getInscriptionDate()
+    {
+        return $this->inscriptionDate;
+    }
+
+    
+    public function setInscriptionDate($inscriptionDate)
+    {
+        $this->inscriptionDate = $inscriptionDate;
+        return $this;
+    }
+
+    /**
+     * @var \DateTime
+     * 
+     * @ORM\Column(name="created", type="datetime", nullable=false)
+     */
+    private $created;
+
+    public function __construct()
+    {
+        $this->created = new \DateTime();
+    }
+
+            VarDumper:dump(new \DateTime('now'));
+        die;
+
+    Accepted

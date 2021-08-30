@@ -1,0 +1,15 @@
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+users:
+    type:     rest
+    resource: AppBundle\Controller\UserController
+
+message:
+    type:     rest
+    resource:  AppBundle\Controller\MessageController
+
+comment:
+    type:     rest
+    resource:  AppBundle\Controller\CommentController
