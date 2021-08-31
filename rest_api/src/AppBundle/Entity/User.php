@@ -40,6 +40,12 @@ class User extends \FOS\UserBundle\Model\User
     protected $comment;
     
     /**
+     * @ORM\OneToMany(targetEntity="Fav", mappedBy="User")
+     * @var Fav[]
+     */
+    protected $fav;
+
+    /**
      * @ORM\Column(type="string")
      * @ORM\Column(unique=true)
      */
@@ -157,6 +163,11 @@ class User extends \FOS\UserBundle\Model\User
     public function getComment()
     {
         return $this->comment;
+    }
+
+    public function getFav()
+    {
+        return $this->fav;
     }
     
     public function setId($id)

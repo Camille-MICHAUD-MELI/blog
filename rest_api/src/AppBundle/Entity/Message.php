@@ -35,6 +35,12 @@ class Message
     protected $comment;
 
     /**
+     * @ORM\OneToMany(targetEntity="Fav", mappedBy="Message")
+     * @var Fav[]
+     */
+    protected $fav;
+
+    /**
      * @ORM\Column(type="text", nullable=false)
      */
     protected $corpse;

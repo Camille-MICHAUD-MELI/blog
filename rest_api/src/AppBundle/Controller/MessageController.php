@@ -36,7 +36,7 @@ class MessageController extends Controller
 
         $results = array('message' => $message,
                          'comment' => $comment);
-
+            
         if (empty($comment)) {
             return ($message);
         } else {

@@ -13,3 +13,7 @@ message:
 comment:
     type:     rest
     resource:  AppBundle\Controller\CommentController
+
+fav:
+    type:     rest
+    resource:  AppBundle\Controller\FavController

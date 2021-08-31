@@ -11,9 +11,9 @@ use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @ORM\Entity()
- * @ORM\Table(name="like")
+ * @ORM\Table(name="fav")
  */
-class Like
+class Fav
 {
     /**
      * @ORM\Id
@@ -23,16 +23,22 @@ class Like
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="like")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="fav")
      * @var User
      */
     protected $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Comment", inversedBy="like")
+     * @ORM\ManyToOne(targetEntity="Comment", inversedBy="fav")
      * @var Comment
      */
     protected $comment;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Message", inversedBy="fav")
+     * @var Message
+     */
+    protected $message;
 
     public function getId()
     {
@@ -64,6 +70,12 @@ class Like
     public function setComment($comment)
     {
         $this->comment = $comment;
+        return $this;
+    }
+
+    public function setMessage($message)
+    {
+        $this->message = $message;
         return $this;
     }
 }
