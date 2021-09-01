@@ -12,6 +12,8 @@ use AppBundle\Form\Type\MessageType;
 use AppBundle\Entity\Message;
 use AppBundle\Form\Type\CommentType;
 use AppBundle\Entity\Comment;
+use AppBundle\Entity\User;
+use AppBundle\Form\Type\UserType;
 
 class MessageController extends Controller
 {
@@ -46,7 +48,7 @@ class MessageController extends Controller
 
     /**
      * @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
-     * @Rest\Delete("/message/{id}")
+     * @Rest\Delete("/message/{id}/{user_id}")
      */
     public function removeMessageAction(Request $request)
     {
@@ -54,10 +56,17 @@ class MessageController extends Controller
         $message = $em->getRepository('AppBundle:Message')
         ->find($request->get('id'));
         /* @var $message Message */
-        
-        if ($message) {
-            $em->remove($message);
-            $em->flush();
+        $user = $this->get('doctrine.orm.entity_manager')
+        ->getRepository('AppBundle:User')
+        ->find($request->get('user_id'));
+
+        if (($message->getId() == $user->getId()) || ($user->getAdmin() == 1)) {
+            if ($message) {
+                $em->remove($message);
+                $em->flush();
+            }
+        } else {
+            return \FOS\RestBundle\View\View::create(['message' => 'Permission denied'], Response::HTTP_UNAUTHORIZED);
         }
     }
 
@@ -77,8 +86,9 @@ class MessageController extends Controller
 
         if (empty($user)) {
             return \FOS\RestBundle\View\View::create(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
-        } else
+        } else {
             $message->setUser($user);
+        }
 
         if ($form->isValid()) {
             $em = $this->get('doctrine.orm.entity_manager');
@@ -108,7 +118,7 @@ class MessageController extends Controller
      * @Rest\View()
      * @Rest\Get("/message/{message_id}")
      */
-    public function getUserAction(Request $request)
+    public function getMessageAction(Request $request)
     {
         $message = $this->get('doctrine.orm.entity_manager')
         ->getRepository('AppBundle:Message')

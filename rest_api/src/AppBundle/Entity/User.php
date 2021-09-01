@@ -28,19 +28,25 @@ class User extends \FOS\UserBundle\Model\User
     protected $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Message", mappedBy="User")
+     * @ORM\Column(type="boolean", options={"default" : 0})
+     */
+    protected $admin;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Message", mappedBy="user")
      * @var Message[]
      */
     protected $message;
 
     /**
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="User")
+     *  
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="user")
      * @var Comment[]
      */
     protected $comment;
     
     /**
-     * @ORM\OneToMany(targetEntity="Fav", mappedBy="User")
+     * @ORM\OneToMany(targetEntity="Fav", mappedBy="user")
      * @var Fav[]
      */
     protected $fav;
@@ -169,7 +175,7 @@ class User extends \FOS\UserBundle\Model\User
     {
         return $this->fav;
     }
-    
+
     public function setId($id)
     {
         $this->id = $id;
@@ -233,6 +239,12 @@ class User extends \FOS\UserBundle\Model\User
     public function setModificationDate($modificationDate)
     {
         $this->modificationDate = $modificationDate;
+        return $this;
+    }
+
+    public function setAdmin($admin)
+    {
+        $this->admin = $admin;
         return $this;
     }
 }

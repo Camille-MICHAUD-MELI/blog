@@ -38,6 +38,7 @@ class UserController extends Controller
     public function postUsersAction(Request $request)
     {
         $user = new User();
+        $user->setAdmin(0);
         $user->setCreated(new \DateTime('now', new \DateTimeZone('Europe/Paris')));
         $form = $this->createForm(UserType::class, $user);
         $form->submit($request->request->all()); // Validation des données

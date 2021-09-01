@@ -24,6 +24,7 @@ class Comment
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="comment")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id") 
      * @var User
      */
     protected $user;

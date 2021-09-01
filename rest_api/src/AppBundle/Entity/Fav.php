@@ -24,6 +24,7 @@ class Fav
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="fav")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * @var User
      */
     protected $user;

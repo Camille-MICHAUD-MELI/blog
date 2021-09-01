@@ -6,8 +6,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\ExecutionContext;
+use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\DateTime;
+use AppBundle\Entity\User as User;
 
 /**
  * @ORM\Entity()
@@ -24,6 +26,7 @@ class Message
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="message")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * @var User
      */
     protected $user;
@@ -75,6 +78,11 @@ class Message
     public function getModificationDate()
     {
         return $this->modificationDate;
+    }
+
+    public function getUser()
+    {
+        return $this->user;
     }
 
     public function setId($id)
