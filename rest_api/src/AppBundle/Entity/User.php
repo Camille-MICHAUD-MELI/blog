@@ -28,11 +28,6 @@ class User extends \FOS\UserBundle\Model\User
     protected $id;
 
     /**
-     * @ORM\Column(type="boolean", options={"default" : 0})
-     */
-    protected $admin;
-
-    /**
      * @ORM\OneToMany(targetEntity="Message", mappedBy="user")
      * @var Message[]
      */
@@ -69,6 +64,11 @@ class User extends \FOS\UserBundle\Model\User
     protected $email;
 
     /**
+     * @ORM\Column(type="string", nullable=false)
+     */
+    protected $password;
+
+    /**
      * @ORM\Column(type="string", nullable=true)
      */
     protected $phone;
@@ -79,17 +79,17 @@ class User extends \FOS\UserBundle\Model\User
     protected $address;
 
     /**
-     * @ORM\Column(type="string", nullable=false)
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $city;
 
     /**
-     * @ORM\Column(type="string", nullable=false)
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $zipcode;
 
     /**
-     * @ORM\Column(type="string", nullable=false)
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $country;
 
@@ -176,6 +176,11 @@ class User extends \FOS\UserBundle\Model\User
         return $this->fav;
     }
 
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
     public function setId($id)
     {
         $this->id = $id;
@@ -242,9 +247,9 @@ class User extends \FOS\UserBundle\Model\User
         return $this;
     }
 
-    public function setAdmin($admin)
+    public function setPassword($password)
     {
-        $this->admin = $admin;
+        $this->password = $password;
         return $this;
     }
 }

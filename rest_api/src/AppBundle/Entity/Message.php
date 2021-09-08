@@ -45,6 +45,12 @@ class Message
 
     /**
      * @ORM\Column(type="text", nullable=false)
+     * @ORM\Column(unique=true)
+     */
+    protected $title;
+
+    /**
+     * @ORM\Column(type="text", nullable=false)
      */
     protected $corpse;
 
@@ -85,6 +91,11 @@ class Message
         return $this->user;
     }
 
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
     public function setId($id)
     {
         $this->id = $id;
@@ -112,6 +123,12 @@ class Message
     public function setUser($user)
     {
         $this->user = $user;
+        return $this;
+    }
+
+    public function setTitle($title)
+    {
+        $this->title = $title;
         return $this;
     }
 }
