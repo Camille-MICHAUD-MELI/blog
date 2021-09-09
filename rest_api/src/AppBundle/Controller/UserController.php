@@ -54,6 +54,28 @@ class UserController extends Controller
 
     /**
      * @Rest\View()
+     * @Rest\Post("/login")
+     */
+    public function postLoginAction(Request $request)
+    {
+        $user = $this->get('doctrine.orm.entity_manager')
+        ->getRepository('AppBundle:User')
+        ->findBy(['email' => $request->get('email'), 'password' => $request->get('password')]);
+
+        if (empty($user)) {
+            return \FOS\RestBundle\View\View::create(['message' => 'Message not found'], Response::HTTP_NOT_FOUND);
+        } else {
+            if ($user) {
+                $response = new JsonResponse();
+                $response->setStatusCode(JsonResponse::HTTP_OK);
+                return $response;
+            }
+        }
+        return $user;
+    }
+
+    /**
+     * @Rest\View()
      * @Rest\Get("/users")
      */
     public function getUsersAction(Request $request)
