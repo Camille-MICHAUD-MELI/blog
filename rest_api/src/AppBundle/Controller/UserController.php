@@ -68,7 +68,7 @@ class UserController extends Controller
         ->findBy(['email' => $request->get('email'), 'password' => $request->get('password')]);
 
         if (empty($user)) {
-            return \FOS\RestBundle\View\View::create(['message' => 'Message not found'], Response::HTTP_NOT_FOUND);
+            return \FOS\RestBundle\View\View::create(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
         } else {
             if ($user) {
                 $response = new JsonResponse();
