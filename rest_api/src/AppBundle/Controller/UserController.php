@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\VarDumper\VarDumper;
 use AppBundle\Form\Type\UserType;
 use AppBundle\Entity\User;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends Controller
 {
@@ -35,7 +36,7 @@ class UserController extends Controller
      * @Rest\View(statusCode=Response::HTTP_CREATED)
      * @Rest\Post("/register")
      */
-    public function postUsersAction(Request $request)
+    public function postUsersAction(Request $request, UserPasswordEncoderInterface $encoder)
     {
         $user = new User();
         $user->setCreated(new \DateTime('now', new \DateTimeZone('Europe/Paris')));
@@ -44,9 +45,13 @@ class UserController extends Controller
 
         if ($form->isValid()) {
             $em = $this->get('doctrine.orm.entity_manager');
+            $encoded = $encoder->encodePassword($user, $request->get('password'));
+            $user->setPassword($encoded);
             $em->persist($user);
             $em->flush();
-            return $user;
+            $response = new JsonResponse($user);
+            $response->setStatusCode(JsonResponse::HTTP_OK);
+            return $response;
         } else {
             return $form;
         }

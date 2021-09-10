@@ -17,3 +17,6 @@ comment:
 fav:
     type:     rest
     resource:  AppBundle\Controller\FavController
+    
+api_login_check:
+    path: /login_check

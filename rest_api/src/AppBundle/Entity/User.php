@@ -8,17 +8,18 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\ExecutionContext;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="users",
- *      uniqueConstraints={@ORM\UniqueConstraint(name="users_pseudo_unique",columns={"pseudo"})}
+ *      uniqueConstraints={@ORM\UniqueConstraint(name="users_username_unique",columns={"username"})}
  * )
- * @UniqueEntity("pseudo")
+ * @UniqueEntity("username")
  * @ORM\HasLifecycleCallbacks 
  * @UniqueEntity("email")
  */
-class User extends \FOS\UserBundle\Model\User
+class User implements UserInterface
 {
     /**
      * @ORM\Id
@@ -50,13 +51,18 @@ class User extends \FOS\UserBundle\Model\User
      * @ORM\Column(type="string")
      * @ORM\Column(unique=true)
      */
-    protected $pseudo;
+    protected $username;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
     protected $bio;
     
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $enabled;
+
     /**
      * @ORM\Column(type="string", nullable=false)
      * @ORM\Column(unique=true)
@@ -106,6 +112,10 @@ class User extends \FOS\UserBundle\Model\User
      */
     public $modificationDate;
 
+    public function getRoles() { return ['ROLE_USER']; }
+    public function eraseCredentials() {}
+    public function getSalt() {}
+
     public function getCreated()
     {
         return $this->created;
@@ -116,9 +126,9 @@ class User extends \FOS\UserBundle\Model\User
         return $this->id;
     }
 
-    public function getPseudo()
+    public function getUsername()
     {
-        return $this->pseudo;
+        return $this->username;
     }
 
     public function getAddress()
@@ -187,9 +197,9 @@ class User extends \FOS\UserBundle\Model\User
         return $this;
     }
 
-    public function setPseudo($pseudo)
+    public function setUsername($username)
     {
-        $this->pseudo = $pseudo;
+        $this->username = $username;
         return $this;
     }
 

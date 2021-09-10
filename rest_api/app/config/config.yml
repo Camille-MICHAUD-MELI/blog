@@ -18,7 +18,7 @@ framework:
     form: ~
     csrf_protection: ~
     validation: { enable_annotations: true }
-    #serializer: { enable_annotations: true }
+    serializer: { enable_annotations: true }
     default_locale: '%locale%'
     trusted_hosts: ~
     session:
@@ -30,8 +30,6 @@ framework:
     assets: ~
     php_errors:
         log: true
-    serializer:
-        enabled: true
 
 # Twig Configuration
 twig:
@@ -73,13 +71,13 @@ sensio_framework_extra:
         annotations: false
 
 fos_rest:
-    routing_loader:
-        include_format: false
-    view:
-        view_response_listener: true
-    format_listener:
-        rules:
-            - { path: '^/', priorities: ['json'], fallback_format: 'json' }
+  routing_loader:
+    include_format: false
+  view:
+    view_response_listener: true
+  format_listener:
+    rules:
+      - { path: "^/", priorities: [ "json" ], fallback_format: "json" }
 
 nelmio_cors:
     defaults:
@@ -91,3 +89,10 @@ nelmio_cors:
         max_age: 3600
     paths:
         '^/': ~
+
+lexik_jwt_authentication:
+    secret_key:       '%kernel.project_dir%/app/config/jwt/mykey.pem' # required for token creation
+    public_key:       '%kernel.project_dir%/app/config/jwt/privkey.pem'  # required for token verification
+    pass_phrase:      'peurdemourir' # required for token creation, usage of an environment variable is recommended
+    token_ttl:        3600
+    
