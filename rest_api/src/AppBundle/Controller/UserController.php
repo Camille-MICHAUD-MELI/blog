@@ -33,7 +33,6 @@ class UserController extends Controller
     }
 
     /**
-     * @Rest\View(statusCode=Response::HTTP_CREATED)
      * @Rest\Post("/register")
      */
     public function postUsersAction(Request $request, UserPasswordEncoderInterface $encoder)
@@ -53,7 +52,9 @@ class UserController extends Controller
             $response->setStatusCode(JsonResponse::HTTP_OK);
             return $response;
         } else {
-            return $form;
+            $response = new JsonResponse($user);
+            $response->setStatusCode(JsonResponse::HTTP_CONFLICT);
+            return $response;
         }
     }
 
@@ -65,7 +66,7 @@ class UserController extends Controller
     {
         $user = $this->get('doctrine.orm.entity_manager')
         ->getRepository('AppBundle:User')
-        ->findBy(['email' => $request->get('email'), 'password' => $request->get('password')]);
+        ->findBy(['username' => $request->get('username'), 'password' => $request->get('password')]);
 
         if (empty($user)) {
             return \FOS\RestBundle\View\View::create(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
@@ -76,7 +77,6 @@ class UserController extends Controller
                 return $response;
             }
         }
-        return $user;
     }
 
     /**

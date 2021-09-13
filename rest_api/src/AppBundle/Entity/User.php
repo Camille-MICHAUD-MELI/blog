@@ -57,11 +57,6 @@ class User implements UserInterface
      * @ORM\Column(type="text", nullable=true)
      */
     protected $bio;
-    
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    protected $enabled;
 
     /**
      * @ORM\Column(type="string", nullable=false)
