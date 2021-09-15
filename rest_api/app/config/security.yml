@@ -26,15 +26,12 @@ security:
                 require_previous_session: false
                 username_parameter: username
                 password_parameter: password
-        api:
-            pattern:   ^/api
+        main:
+            pattern: ^/
             stateless: true
-            provider: entity_provider
-            guard:
-                authenticators:
-                    - lexik_jwt_authentication.jwt_token_authenticator
+            anonymous: true
+            logout: true
+            lexik_jwt: ~
 
     access_control:
-        - { path: ^/api/login_check, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login_check, roles: IS_AUTHENTICATED_ANONYMOUSLY }

@@ -81,6 +81,18 @@ class UserController extends Controller
 
     /**
      * @Rest\View()
+     * @Rest\Get("/gettokenuser")
+     */
+    public function getUsertokeAction(Request $request)
+    {
+        $user = $this->container->get('security.token_storage')
+        ->getToken();
+
+        return $user;
+    }
+
+    /**
+     * @Rest\View()
      * @Rest\Get("/users")
      */
     public function getUsersAction(Request $request)
@@ -103,6 +115,8 @@ class UserController extends Controller
         ->getRepository('AppBundle:User')
         ->find($request->get('user_id'));
         /* @var $user User */
+        VarDumper::dump($user->getRoles());
+        exit();
         
         if (empty($user)) {
             return \FOS\RestBundle\View\View::create(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
