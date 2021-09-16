@@ -91,8 +91,8 @@ nelmio_cors:
         '^/': ~
 
 lexik_jwt_authentication:
-    secret_key:       '%kernel.project_dir%/app/config/jwt/privkey.pem' # required for token creation
-    public_key:       '%kernel.project_dir%/app/config/jwt/mykey.pem'  # required for token verification
+    secret_key:       '%kernel.project_dir%/app/config/jwt/privatekey.pem' # required for token creation
+    public_key:       '%kernel.project_dir%/app/config/jwt/publickey.pem'  # required for token verification
     pass_phrase:      'peurdemourir' # required for token creation, usage of an environment variable is recommended
     token_ttl:        3600
     
