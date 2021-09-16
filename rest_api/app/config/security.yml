@@ -30,8 +30,9 @@ security:
             pattern: ^/
             stateless: true
             anonymous: true
-            logout: true
+            logout:
+                path: api_logout
             lexik_jwt: ~
 
     access_control:
-        - { path: ^/login_check, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/api/login, roles: ROLE_USER }
