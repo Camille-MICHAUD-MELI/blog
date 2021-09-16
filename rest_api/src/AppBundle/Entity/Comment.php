@@ -38,6 +38,16 @@ class Comment
     /**
      * @ORM\Column(type="text", nullable=false)
      */
+    protected $title;
+
+    /**
+     * @ORM\Column(type="text", nullable=false)
+     */
+    protected $post_title;
+
+    /**
+     * @ORM\Column(type="text", nullable=false)
+     */
     protected $corpse;
 
     /**

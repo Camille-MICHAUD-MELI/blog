@@ -68,38 +68,36 @@ class CommentController extends Controller
 
     /**
      * @Rest\View(statusCode=Response::HTTP_CREATED)
-     * @Rest\Post("/message/{message_id}/comment/{user_id}")
+     * @Rest\Post("/commentpost")
      */
-    public function postCommentAction(Request $request)
+    public function postMessageAction(Request $request)
     {
         $comment = new Comment();
         $comment->setPublicationDate(new \DateTime('now', new \DateTimeZone('Europe/Paris')));
         $form = $this->createForm(CommentType::class, $comment);
         $form->submit($request->request->all());
-        $user = $this->get('doctrine.orm.entity_manager')
-        ->getRepository('AppBundle:User')
-        ->find($request->get('user_id'));
+        $user = $this->container->get('security.token_storage')
+        ->getToken()
+        ->getUser();
         $message = $this->get('doctrine.orm.entity_manager')
         ->getRepository('AppBundle:Message')
-        ->find($request->get('message_id'));
+        ->find('test');
+        VarDumper:dump($message);
+        die;
 
-        if (empty($user)) {
-            return \FOS\RestBundle\View\View::create(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
-        } else
+        if ($form->isValid() && $user != null && $message != null) {
             $comment->setUser($user);
-
-        if (empty($message)) {
-            return \FOS\RestBundle\View\View::create(['message' => 'Message not found'], Response::HTTP_NOT_FOUND);
-        } else
             $comment->setMessage($message);
-
-        if ($form->isValid()) {
             $em = $this->get('doctrine.orm.entity_manager');
             $em->persist($comment);
             $em->flush();
-            return $comment;
+            $response = new JsonResponse($comment);
+            $response->setStatusCode(JsonResponse::HTTP_CREATED);
+            return $response;
         } else {
-            return $form;
+            $response = new JsonResponse($comment);
+            $response->setStatusCode(JsonResponse::HTTP_CONFLICT);
+            return $response;
         }
     }
 }
