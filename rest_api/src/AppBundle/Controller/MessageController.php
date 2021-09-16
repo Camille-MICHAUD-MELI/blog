@@ -72,7 +72,7 @@ class MessageController extends Controller
 
     /**
      * @Rest\View(statusCode=Response::HTTP_CREATED)
-     * @Rest\Post("/message/{user_id}")
+     * @Rest\Post("/messagepost")
      */
     public function postMessageAction(Request $request)
     {
@@ -80,23 +80,22 @@ class MessageController extends Controller
         $message->setPublicationDate(new \DateTime('now', new \DateTimeZone('Europe/Paris')));
         $form = $this->createForm(MessageType::class, $message);
         $form->submit($request->request->all());
-        $user = $this->get('doctrine.orm.entity_manager')
-        ->getRepository('AppBundle:User')
-        ->find($request->get('user_id'));
-
-        if (empty($user)) {
-            return \FOS\RestBundle\View\View::create(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
-        } else {
-            $message->setUser($user);
-        }
+        $user = $this->container->get('security.token_storage')
+        ->getToken()
+        ->getUser();
 
         if ($form->isValid()) {
+            $message->setUser($user);
             $em = $this->get('doctrine.orm.entity_manager');
             $em->persist($message);
             $em->flush();
-            return $message;
+            $response = new JsonResponse($message);
+            $response->setStatusCode(JsonResponse::HTTP_CREATED);
+            return $response;
         } else {
-            return $form;
+            $response = new JsonResponse($message);
+            $response->setStatusCode(JsonResponse::HTTP_CONFLICT);
+            return $response;
         }
     }
 
