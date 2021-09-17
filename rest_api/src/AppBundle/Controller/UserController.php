@@ -81,14 +81,13 @@ class UserController extends Controller
     }
 
     /**
-     * @Rest\View(serializerGroups={"user"})
+     * @Rest\View(statusCode=Response::HTTP_OK, serializerGroups={"user"})
      * @Rest\Get("/gettokenuser")
      */
     public function getUsertokeAction(Request $request)
     {
         $user = $this->container->get('security.token_storage')
-        ->getToken()
-        ->getUser();
+        ->getToken();
 
         return $user;
     }
