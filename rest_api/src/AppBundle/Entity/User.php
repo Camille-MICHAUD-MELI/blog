@@ -108,7 +108,9 @@ class User implements UserInterface
     public $modificationDate;
 
     public function getRoles() { return ['ROLE_USER']; }
+
     public function eraseCredentials() {}
+
     public function getSalt() {}
 
     public function getCreated()

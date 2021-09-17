@@ -14,7 +14,7 @@ use AppBundle\Entity\Comment;
 class CommentController extends Controller
 {
     /**
-     * @Rest\View()
+     * @Rest\View(serializerGroups={"comment"})
      * @Rest\Get("/message/{user_id}/users")
      */
     public function getUsercommentAction(Request $request)
@@ -32,7 +32,7 @@ class CommentController extends Controller
     }
 
     /**
-     * @Rest\View()
+     * @Rest\View(serializerGroups={"comment"})
      * @Rest\Get("/message/{message_id}/comment")
      */
     public function getCommentsAction(Request $request)
@@ -50,7 +50,7 @@ class CommentController extends Controller
     }
 
     /**
-     * @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
+     * @Rest\View(statusCode=Response::HTTP_NO_CONTENT, serializerGroups={"comment"})
      * @Rest\Delete("/comment/{id}")
      */
     public function removeCommentAction(Request $request)
@@ -67,7 +67,7 @@ class CommentController extends Controller
     }
 
     /**
-     * @Rest\View(statusCode=Response::HTTP_CREATED)
+     * @Rest\View(statusCode=Response::HTTP_CREATED, serializerGroups={"comment"})
      * @Rest\Post("/commentpost")
      */
     public function postMessageAction(Request $request)
@@ -82,8 +82,6 @@ class CommentController extends Controller
         $message = $this->get('doctrine.orm.entity_manager')
         ->getRepository('AppBundle:Message')
         ->find('test');
-        VarDumper:dump($message);
-        die;
 
         if ($form->isValid() && $user != null && $message != null) {
             $comment->setUser($user);

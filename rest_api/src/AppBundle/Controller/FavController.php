@@ -14,7 +14,7 @@ use AppBundle\Entity\Message;
 class FavController extends Controller
 {
     /**
-     * @Rest\View()
+     * @Rest\View(serializerGroups={"fav"})
      * @Rest\Post("/fav/message/{message_id}/{user_id}")
      */
     public function favPostAction(Request $request)
@@ -59,7 +59,7 @@ class FavController extends Controller
     }
 
     /**
-     * @Rest\View()
+     * @Rest\View(serializerGroups={"fav"})
      * @Rest\Post("/fav/comment/{comment_id}/{user_id}")
      */
     public function favCommentAction(Request $request)

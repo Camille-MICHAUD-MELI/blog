@@ -18,7 +18,7 @@ use AppBundle\Form\Type\UserType;
 class MessageController extends Controller
 {
     /**
-     * @Rest\View()
+     * @Rest\View(serializerGroups={"messages"})
      * @Rest\Get("/message-comment/{message_id}")
      */
     public function getMessageandcommentAction(Request $request)
@@ -47,7 +47,7 @@ class MessageController extends Controller
     }
 
     /**
-     * @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
+     * @Rest\View(statusCode=Response::HTTP_NO_CONTENT, serializerGroups={"messages"})
      * @Rest\Delete("/message/{id}/{user_id}")
      */
     public function removeMessageAction(Request $request)
@@ -71,7 +71,7 @@ class MessageController extends Controller
     }
 
     /**
-     * @Rest\View(statusCode=Response::HTTP_CREATED)
+     * @Rest\View(statusCode=Response::HTTP_CREATED, serializerGroups={"messages"})
      * @Rest\Post("/messagepost")
      */
     public function postMessageAction(Request $request)
@@ -100,7 +100,7 @@ class MessageController extends Controller
     }
 
     /**
-     * @Rest\View()
+     * @Rest\View(serializerGroups={"messages"})
      * @Rest\Get("/message")
      */
     public function getMessagesAction(Request $request)
@@ -114,7 +114,7 @@ class MessageController extends Controller
     }
 
     /**
-     * @Rest\View()
+     * @Rest\View(serializerGroups={"messages"})
      * @Rest\Get("/message/{message_id}")
      */
     public function getMessageAction(Request $request)
@@ -132,7 +132,7 @@ class MessageController extends Controller
     }
 
     /**
-     * @Rest\View()
+     * @Rest\View(serializerGroups={"messages"})
      * @Rest\Patch("/message/{id}")
      */
     public function patchMessageAction(Request $request)

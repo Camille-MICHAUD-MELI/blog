@@ -16,7 +16,7 @@ class UserController extends Controller
 {
 
     /**
-     * @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
+     * @Rest\View(statusCode=Response::HTTP_NO_CONTENT, serializerGroups={"user"})
      * @Rest\Delete("/users/{id}")
      */
     public function removeUserAction(Request $request)
@@ -33,6 +33,7 @@ class UserController extends Controller
     }
 
     /**
+     * @Rest\View(serializerGroups={"user"})
      * @Rest\Post("/register")
      */
     public function postUsersAction(Request $request, UserPasswordEncoderInterface $encoder)
@@ -59,7 +60,7 @@ class UserController extends Controller
     }
 
     /**
-     * @Rest\View()
+     * @Rest\View(serializerGroups={"user"})
      * @Rest\Post("/login")
      */
     public function postLoginAction(Request $request)
@@ -80,7 +81,7 @@ class UserController extends Controller
     }
 
     /**
-     * @Rest\View()
+     * @Rest\View(serializerGroups={"user"})
      * @Rest\Get("/gettokenuser")
      */
     public function getUsertokeAction(Request $request)
@@ -92,7 +93,7 @@ class UserController extends Controller
     }
 
     /**
-     * @Rest\View()
+     * @Rest\View(serializerGroups={"user"})
      * @Rest\Get("/users")
      */
     public function getUsersAction(Request $request)
@@ -106,7 +107,7 @@ class UserController extends Controller
     }
 
     /**
-     * @Rest\View()
+     * @Rest\View(serializerGroups={"user"})
      * @Rest\Get("/users/{user_id}")
      */
     public function getUserAction(Request $request)
@@ -126,7 +127,7 @@ class UserController extends Controller
     }
 
     /**
-     * @Rest\View()
+     * @Rest\View(serializerGroups={"user"})
      * @Rest\Patch("/users/{id}")
      */
     public function patchUserAction(Request $request)
@@ -135,7 +136,7 @@ class UserController extends Controller
     }
 
     /**
-     * @Rest\View()
+     * @Rest\View(serializerGroups={"user"})
      * @Rest\Put("/users/{id}");
      */
     public function putUserAction(Request $request)
