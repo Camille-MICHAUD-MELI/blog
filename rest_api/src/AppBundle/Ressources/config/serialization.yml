@@ -37,11 +37,11 @@ AppBundle\Entity\Message:
         id:
             groups: ['comment', 'messages', 'user', 'fav']
         user:
-            groups: ['messages']
+            groups: ['messages', 'user']
         comment:
-            groups: ['messages']
+            groups: ['messages', 'user']
         fav:
-            groups: ['messages']
+            groups: ['messages', 'user']
         title:
             groups: ['comment', 'messages', 'user', 'fav']
         corpse:
@@ -57,9 +57,9 @@ AppBundle\Entity\Comment:
           id:
               groups: ['comment', 'messages', 'user', 'fav']
           user:
-              groups: ['comment']
+              groups: ['comment', 'user']
           message:
-              groups: ['comment']
+              groups: ['comment', 'user']
           title:
               groups: ['comment', 'messages', 'user', 'fav']
           post_title:
@@ -77,8 +77,8 @@ AppBundle\Entity\Fav:
           id:
               groups: ['fav', 'comment', 'messages', 'user']
           user:
-              groups: ['fav']
+              groups: ['fav', 'user']
           comment:
-              groups: ['fav']
+              groups: ['fav', 'user']
           message:
-              groups: ['fav']
+              groups: ['fav', 'user']

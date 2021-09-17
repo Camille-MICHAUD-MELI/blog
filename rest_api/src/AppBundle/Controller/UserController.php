@@ -87,7 +87,8 @@ class UserController extends Controller
     public function getUsertokeAction(Request $request)
     {
         $user = $this->container->get('security.token_storage')
-        ->getToken();
+        ->getToken()
+        ->getUser();
 
         return $user;
     }
