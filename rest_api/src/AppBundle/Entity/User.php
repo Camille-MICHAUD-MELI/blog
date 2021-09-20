@@ -9,6 +9,9 @@ use Symfony\Component\Validator\ExecutionContext;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Security\Core\User\UserInterface;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Exclude;
 
 /**
  * @ORM\Entity
@@ -18,91 +21,105 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @UniqueEntity("username")
  * @ORM\HasLifecycleCallbacks 
  * @UniqueEntity("email")
+ * @ExclusionPolicy("all")
  */
 class User implements UserInterface
 {
     /**
+     * @Expose
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue
      */
     protected $id;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Message", mappedBy="user")
-     * @var Message[]
-     */
-    protected $message;
+    // /**
+    //  * @ORM\OneToMany(targetEntity="Message", mappedBy="user")
+    //  * @var Message[]
+    //  * @Exclude
+    //  */
+    // protected $message;
+
+    // /**
+    //  * @ORM\OneToMany(targetEntity="Comment", mappedBy="user")
+    //  * @Exclude
+    //  * @var Comment[]
+    //  */
+    // protected $comment;
+
+    // /**
+    //  * @ORM\OneToMany(targetEntity="Fav", mappedBy="user")
+    //  * @var Fav[]
+    //  * @Exclude
+    //  */
+    // protected $fav;
 
     /**
-     *  
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="user")
-     * @var Comment[]
-     */
-    protected $comment;
-    
-    /**
-     * @ORM\OneToMany(targetEntity="Fav", mappedBy="user")
-     * @var Fav[]
-     */
-    protected $fav;
-
-    /**
+     * @Expose
      * @ORM\Column(type="string")
      * @ORM\Column(unique=true)
      */
     protected $username;
 
     /**
+     * @Expose
      * @ORM\Column(type="text", nullable=true)
      */
     protected $bio;
 
     /**
+     * @Expose
      * @ORM\Column(type="string", nullable=false)
      * @ORM\Column(unique=true)
      */
     protected $email;
 
     /**
+     * @Expose
      * @ORM\Column(type="string", nullable=false)
      */
     protected $password;
 
     /**
+     * @Expose
      * @ORM\Column(type="string", nullable=true)
      */
     protected $phone;
 
     /**
+     * @Expose
      * @ORM\Column(type="string", nullable=true)
      */
     protected $address;
 
     /**
+     * @Expose
      * @ORM\Column(type="string", nullable=true)
      */
     protected $city;
 
     /**
+     * @Expose
      * @ORM\Column(type="string", nullable=true)
      */
     protected $zipcode;
 
     /**
+     * @Expose
      * @ORM\Column(type="string", nullable=true)
      */
     protected $country;
 
     /**
      * @var \DateTime
-     * 
+     * @Expose
      * @ORM\Column(name="created", type="datetime")
      */
     private $created;
 
     /**
      * @var \DateTime
+     * @Expose
      * @ORM\Column(name="last_modification", type="datetime", nullable=true)
      */
     public $modificationDate;
@@ -168,20 +185,20 @@ class User implements UserInterface
         return $this->modificationDate;
     }
 
-    public function getMessage()
-    {
-        return $this->message;
-    }
+    // public function getMessage()
+    // {
+    //     return $this->message;
+    // }
 
-    public function getComment()
-    {
-        return $this->comment;
-    }
+    // public function getComment()
+    // {
+    //     return $this->comment;
+    // }
 
-    public function getFav()
-    {
-        return $this->fav;
-    }
+    // public function getFav()
+    // {
+    //     return $this->fav;
+    // }
 
     public function getPassword()
     {

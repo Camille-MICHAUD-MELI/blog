@@ -1,84 +1,84 @@
-AppBundle\Entity\User:
-    attributes:
-        id:
-            groups: ['comment', 'messages', 'user', 'fav']
-        message:
-            groups: ['user']
-        comment:
-            groups: ['user']
-        fav:
-            groups: ['user']
-        username:
-            groups: ['comment', 'messages', 'user', 'fav']
-        bio:
-            groups: ['comment', 'messages', 'user', 'fav']
-        email:
-            groups: ['comment', 'messages', 'user', 'fav']
-        password:
-            groups: ['comment', 'messages', 'user', 'fav']
-        phone:
-            groups: ['comment', 'messages', 'user', 'fav']
-        address:
-            groups: ['comment', 'messages', 'user', 'fav']
-        city:
-            groups: ['comment', 'messages', 'user', 'fav']
-        zipcode:
-            groups: ['comment', 'messages', 'user', 'fav']
-        country:
-            groups: ['comment', 'messages', 'user', 'fav']
-        created:
-            groups: ['comment', 'messages', 'user', 'fav']
-        modificationDate:
-            groups: ['comment', 'messages', 'user', 'fav']
+# AppBundle\Entity\User:
+#     attributes:
+#         id:
+#             groups: ['comment', 'messages', 'user', 'fav']
+#         message:
+#             groups: ['user']
+#         comment:
+#             groups: ['user']
+#         fav:
+#             groups: ['user']
+#         username:
+#             groups: ['comment', 'messages', 'user', 'fav']
+#         bio:
+#             groups: ['comment', 'messages', 'user', 'fav']
+#         email:
+#             groups: ['comment', 'messages', 'user', 'fav']
+#         password:
+#             groups: ['comment', 'messages', 'user', 'fav']
+#         phone:
+#             groups: ['comment', 'messages', 'user', 'fav']
+#         address:
+#             groups: ['comment', 'messages', 'user', 'fav']
+#         city:
+#             groups: ['comment', 'messages', 'user', 'fav']
+#         zipcode:
+#             groups: ['comment', 'messages', 'user', 'fav']
+#         country:
+#             groups: ['comment', 'messages', 'user', 'fav']
+#         created:
+#             groups: ['comment', 'messages', 'user', 'fav']
+#         modificationDate:
+#             groups: ['comment', 'messages', 'user', 'fav']
 
 
-AppBundle\Entity\Message:
-    attributes:
-        id:
-            groups: ['comment', 'messages', 'user', 'fav']
-        user:
-            groups: ['messages']
-        comment:
-            groups: ['messages']
-        fav:
-            groups: ['messages']
-        title:
-            groups: ['comment', 'messages', 'user', 'fav']
-        corpse:
-            groups: ['comment', 'messages', 'user', 'fav']
-        publicationDate:
-            groups: ['comment', 'messages', 'user', 'fav']
-        modificationDate:
-            groups: ['comment', 'messages', 'user', 'fav']
+# AppBundle\Entity\Message:
+#     attributes:
+#         id:
+#             groups: ['comment', 'messages', 'user', 'fav']
+#         user:
+#             groups: ['messages']
+#         comment:
+#             groups: ['messages']
+#         fav:
+#             groups: ['messages']
+#         title:
+#             groups: ['comment', 'messages', 'user', 'fav']
+#         corpse:
+#             groups: ['comment', 'messages', 'user', 'fav']
+#         publicationDate:
+#             groups: ['comment', 'messages', 'user', 'fav']
+#         modificationDate:
+#             groups: ['comment', 'messages', 'user', 'fav']
 
 
-AppBundle\Entity\Comment:
-      attributes:
-          id:
-              groups: ['comment', 'messages', 'user', 'fav']
-          user:
-              groups: ['comment']
-          message:
-              groups: ['comment']
-          title:
-              groups: ['comment', 'messages', 'user', 'fav']
-          post_title:
-              groups: ['comment', 'messages', 'user', 'fav']
-          corpse:
-              groups: ['comment', 'messages', 'user', 'fav']
-          publicationDate:
-              groups: ['comment', 'messages', 'user', 'fav']
-          modificationDate:
-              groups: ['comment', 'messages', 'user', 'fav']
+# AppBundle\Entity\Comment:
+#       attributes:
+#           id:
+#               groups: ['comment', 'messages', 'user', 'fav']
+#           user:
+#               groups: ['comment']
+#           message:
+#               groups: ['comment']
+#           title:
+#               groups: ['comment', 'messages', 'user', 'fav']
+#           post_title:
+#               groups: ['comment', 'messages', 'user', 'fav']
+#           corpse:
+#               groups: ['comment', 'messages', 'user', 'fav']
+#           publicationDate:
+#               groups: ['comment', 'messages', 'user', 'fav']
+#           modificationDate:
+#               groups: ['comment', 'messages', 'user', 'fav']
 
 
-AppBundle\Entity\Fav:
-      attributes:
-          id:
-              groups: ['fav', 'comment', 'messages', 'user']
-          user:
-              groups: ['fav']
-          comment:
-              groups: ['fav']
-          message:
-              groups: ['fav']
+# AppBundle\Entity\Fav:
+#       attributes:
+#           id:
+#               groups: ['fav', 'comment', 'messages', 'user']
+#           user:
+#               groups: ['fav']
+#           comment:
+#               groups: ['fav']
+#           message:
+#               groups: ['fav']

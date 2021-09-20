@@ -81,7 +81,7 @@ class UserController extends Controller
     }
 
     /**
-     * @Rest\View(statusCode=Response::HTTP_OK, serializerGroups={"user"})
+     * @Rest\View(statusCode=Response::HTTP_OK)
      * @Rest\Get("/gettokenuser")
      */
     public function getUsertokeAction(Request $request)
@@ -93,7 +93,7 @@ class UserController extends Controller
     }
 
     /**
-     * @Rest\View(serializerGroups={"user"})
+     * @Rest\View)
      * @Rest\Get("/users")
      */
     public function getUsersAction(Request $request)
@@ -116,14 +116,13 @@ class UserController extends Controller
         ->getRepository('AppBundle:User')
         ->find($request->get('user_id'));
         /* @var $user User */
-        VarDumper::dump($user->getRoles());
-        exit();
+        // $resp = $this->get('serializer')->serialize($user, 'json');
         
         if (empty($user)) {
             return \FOS\RestBundle\View\View::create(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
         }
         
-        return $user;
+        return $resp;
     }
 
     /**

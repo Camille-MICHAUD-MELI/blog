@@ -10,14 +10,18 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\DateTime;
 use AppBundle\Entity\User as User;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 
 /**
  * @ORM\Entity()
  * @ORM\Table(name="post")
+ * @ExclusionPolicy("all")
  */
 class Message
 {
     /**
+     * @Expose
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue
@@ -25,42 +29,49 @@ class Message
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="message")
+     * @Exclude
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="messages")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * @var User
      */
     protected $user;
 
     /**
+     * @Exclude
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="Message")
      * @var Comment[]
      */
-    protected $comment;
+    protected $comments;
 
     /**
+     * @Exclude
      * @ORM\OneToMany(targetEntity="Fav", mappedBy="Message")
      * @var Fav[]
      */
     protected $fav;
 
     /**
+     * @Expose
      * @ORM\Column(type="text", nullable=false)
      * @ORM\Column(unique=true)
      */
     protected $title;
 
     /**
+     * @Expose
      * @ORM\Column(type="text", nullable=false)
      */
     protected $corpse;
 
     /**
+     * @Expose
      * @var \DateTime
      * @ORM\Column(name="date_of_post", type="datetime")
      */
     private $publicationDate;
 
     /**
+     * @Expose
      * @var \DateTime
      * @ORM\Column(name="date_of_modification", type="datetime", nullable=true)
      */

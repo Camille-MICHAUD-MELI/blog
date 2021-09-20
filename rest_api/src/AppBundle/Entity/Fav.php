@@ -8,14 +8,18 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\ExecutionContext;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\DateTime;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 
 /**
  * @ORM\Entity()
  * @ORM\Table(name="fav")
+ * @ExclusionPolicy("all")
  */
 class Fav
 {
     /**
+     * @Expose
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue
@@ -23,23 +27,23 @@ class Fav
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="fav")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="favs")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * @var User
      */
     protected $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Comment", inversedBy="fav")
+     * @ORM\ManyToOne(targetEntity="Comment", inversedBy="favs")
      * @var Comment
      */
     protected $comment;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Message", inversedBy="fav")
+     * @ORM\ManyToOne(targetEntity="Message", inversedBy="favs")
      * @var Message
      */
-    protected $message;
+    protected $messages;
 
     public function getId()
     {
@@ -74,9 +78,9 @@ class Fav
         return $this;
     }
 
-    public function setMessage($message)
+    public function setMessage($messages)
     {
-        $this->message = $message;
+        $this->messages = $message;
         return $this;
     }
 }

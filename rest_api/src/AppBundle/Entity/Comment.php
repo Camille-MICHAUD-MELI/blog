@@ -8,14 +8,18 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\ExecutionContext;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\DateTime;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 
 /**
  * @ORM\Entity()
  * @ORM\Table(name="comment")
+ * @ExclusionPolicy("all")
  */
 class Comment
 {
     /**
+     * @Expose
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue
@@ -36,27 +40,32 @@ class Comment
     protected $message;
 
     /**
+     * @Expose
      * @ORM\Column(type="text", nullable=false)
      */
     protected $title;
 
     /**
+     * @Expose
      * @ORM\Column(type="text", nullable=false)
      */
     protected $post_title;
 
     /**
+     * @Expose
      * @ORM\Column(type="text", nullable=false)
      */
     protected $corpse;
 
     /**
+     * @Expose
      * @var \DateTime
      * @ORM\Column(name="date_of_post", type="datetime")
      */
     private $publicationDate;
 
     /**
+     * @Expose
      * @var \DateTime
      * @ORM\Column(name="last_modification", type="datetime", nullable=true)
      */
