@@ -12,10 +12,11 @@ use Symfony\Component\Validator\Constraints\DateTime;
 use AppBundle\Entity\User as User;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Exclude;
 
 /**
  * @ORM\Entity()
- * @ORM\Table(name="post")
+ * @ORM\Table(name="messages")
  * @ExclusionPolicy("all")
  */
 class Message
