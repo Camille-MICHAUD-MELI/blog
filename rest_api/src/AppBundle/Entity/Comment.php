@@ -49,12 +49,6 @@ class Comment
      * @Expose
      * @ORM\Column(type="text", nullable=false)
      */
-    protected $post_title;
-
-    /**
-     * @Expose
-     * @ORM\Column(type="text", nullable=false)
-     */
     protected $corpse;
 
     /**
