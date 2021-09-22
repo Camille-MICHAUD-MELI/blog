@@ -67,10 +67,10 @@ class CommentController extends Controller
     }
 
     /**
-     * @Rest\View(statusCode=Response::HTTP_CREATED, serializerGroups={"comment"})
-     * @Rest\Post("/commentpost")
+     * @Rest\View(statusCode=Response::HTTP_CREATED)
+     * @Rest\Post("/commentpost/{id}")
      */
-    public function postMessageAction(Request $request)
+    public function postMessageAction(Request $request, $id)
     {
         $comment = new Comment();
         $comment->setPublicationDate(new \DateTime('now', new \DateTimeZone('Europe/Paris')));
@@ -81,7 +81,7 @@ class CommentController extends Controller
         ->getUser();
         $message = $this->get('doctrine.orm.entity_manager')
         ->getRepository('AppBundle:Message')
-        ->find('test');
+        ->find($id);
 
         if ($form->isValid() && $user != null && $message != null) {
             $comment->setUser($user);

@@ -36,7 +36,6 @@ class User implements UserInterface
     // /**
     //  * @ORM\OneToMany(targetEntity="Message", mappedBy="user")
     //  * @var Message[]
-    //  * @Exclude
     //  */
     // protected $message;
 

@@ -22,10 +22,10 @@ use JMS\Serializer\Annotation\Exclude;
 class Message
 {
     /**
-     * @Expose
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue
+     * @Expose
      */
     protected $id;
 
@@ -38,43 +38,41 @@ class Message
     protected $user;
 
     /**
-     * @Exclude
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="Message")
      * @var Comment[]
      */
     protected $comments;
 
     /**
-     * @Exclude
      * @ORM\OneToMany(targetEntity="Fav", mappedBy="Message")
      * @var Fav[]
      */
     protected $fav;
 
     /**
-     * @Expose
      * @ORM\Column(type="text", nullable=false)
      * @ORM\Column(unique=true)
+     * @Expose
      */
     protected $title;
 
     /**
-     * @Expose
      * @ORM\Column(type="text", nullable=false)
+     * @Expose
      */
     protected $corpse;
 
     /**
-     * @Expose
      * @var \DateTime
      * @ORM\Column(name="date_of_post", type="datetime")
+     * @Expose
      */
     private $publicationDate;
 
     /**
-     * @Expose
      * @var \DateTime
      * @ORM\Column(name="date_of_modification", type="datetime", nullable=true)
+     * @Expose
      */
     public $modificationDate;
 

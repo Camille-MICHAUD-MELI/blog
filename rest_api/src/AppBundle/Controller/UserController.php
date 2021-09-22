@@ -107,8 +107,8 @@ class UserController extends Controller
     }
 
     /**
-     * @Rest\View(serializerGroups={"user"})
-     * @Rest\Get("/users/{user_id}")
+     * @Rest\View()
+     * @Rest\Get("/user/{user_id}")
      */
     public function getUserAction(Request $request)
     {
@@ -116,13 +116,12 @@ class UserController extends Controller
         ->getRepository('AppBundle:User')
         ->find($request->get('user_id'));
         /* @var $user User */
-        // $resp = $this->get('serializer')->serialize($user, 'json');
         
         if (empty($user)) {
             return \FOS\RestBundle\View\View::create(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
         }
         
-        return $resp;
+        return $user;
     }
 
     /**
@@ -132,6 +131,15 @@ class UserController extends Controller
     public function patchUserAction(Request $request)
     {
         return $this->updateUser($request, false);
+    }
+
+    /**
+     * @Rest\View(serializerGroups={"user"})
+     * @Rest\Post("/logout")
+     */
+    public function postLogout(Request $request)
+    {
+        return \FOS\RestBundle\View\View::create(['message' => 'Logout success'], Response::HTTP_OK);
     }
 
     /**

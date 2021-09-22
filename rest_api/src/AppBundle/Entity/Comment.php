@@ -28,7 +28,7 @@ class Comment
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="comment")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id") 
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * @var User
      */
     protected $user;
@@ -85,6 +85,11 @@ class Comment
         return $this->modificationDate;
     }
 
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
     public function setId($id)
     {
         $this->id = $id;
@@ -119,5 +124,11 @@ class Comment
     {
         $this->message = $message;
         return $this;
+    }
+
+    public function setTitle($title)
+    {
+        $this->title = $title;
+        return $title;
     }
 }

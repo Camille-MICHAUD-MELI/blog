@@ -100,7 +100,7 @@ class MessageController extends Controller
     }
 
     /**
-     * @Rest\View(serializerGroups={"messages"})
+     * @Rest\View()
      * @Rest\Get("/message")
      */
     public function getMessagesAction(Request $request)
@@ -108,13 +108,14 @@ class MessageController extends Controller
         $message = $this->get('doctrine.orm.entity_manager')
         ->getRepository('AppBundle:Message')
         ->findAll();
+
         /* @var $message Message[] */
-        
+
         return $message;
     }
 
     /**
-     * @Rest\View(serializerGroups={"messages"})
+     * @Rest\View()
      * @Rest\Get("/message/{message_id}")
      */
     public function getMessageAction(Request $request)
@@ -122,12 +123,12 @@ class MessageController extends Controller
         $message = $this->get('doctrine.orm.entity_manager')
         ->getRepository('AppBundle:Message')
         ->find($request->get('message_id'));
+
         /* @var $message Message */
         
         if (empty($message)) {
             return \FOS\RestBundle\View\View::create(['message' => 'Message not found'], Response::HTTP_NOT_FOUND);
         }
-        
         return $message;
     }
 
