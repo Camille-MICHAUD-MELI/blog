@@ -65,6 +65,8 @@ class UserController extends Controller
      */
     public function postLoginAction(Request $request)
     {
+        VarDumper::dump($request);
+        die;
         $user = $this->get('doctrine.orm.entity_manager')
         ->getRepository('AppBundle:User')
         ->findBy(['username' => $request->get('username'), 'password' => $request->get('password')]);
@@ -125,7 +127,7 @@ class UserController extends Controller
     }
 
     /**
-     * @Rest\View(serializerGroups={"user"})
+     * @Rest\View()
      * @Rest\Patch("/users/{id}")
      */
     public function patchUserAction(Request $request)
@@ -134,21 +136,12 @@ class UserController extends Controller
     }
 
     /**
-     * @Rest\View(serializerGroups={"user"})
+     * @Rest\View()
      * @Rest\Post("/logout")
      */
     public function postLogout(Request $request)
     {
         return \FOS\RestBundle\View\View::create(['message' => 'Logout success'], Response::HTTP_OK);
-    }
-
-    /**
-     * @Rest\View(serializerGroups={"user"})
-     * @Rest\Put("/users/{id}");
-     */
-    public function putUserAction(Request $request)
-    {
-        return $this->updateUser($request, true);
     }
 
     private function updateUser(Request $request, $clearMissing)

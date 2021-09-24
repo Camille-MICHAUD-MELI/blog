@@ -18,7 +18,7 @@ use AppBundle\Form\Type\UserType;
 class MessageController extends Controller
 {
     /**
-     * @Rest\View(serializerGroups={"messages"})
+     * @Rest\View()
      * @Rest\Get("/message-comment/{message_id}")
      */
     public function getMessageandcommentAction(Request $request)
@@ -29,7 +29,7 @@ class MessageController extends Controller
         /* @var $message Message */
         $comment = $this->get('doctrine.orm.entity_manager')
         ->getRepository('AppBundle:Comment')
-        ->findBy(['user' => $request->get('message_id')]);
+        ->findBy(['message' => $request->get('message_id')]);
         /* @var $comment Comment */
         
         if (empty($message)) {
@@ -38,12 +38,8 @@ class MessageController extends Controller
 
         $results = array('message' => $message,
                          'comment' => $comment);
-            
-        if (empty($comment)) {
-            return ($message);
-        } else {
-            return $results;
-        }
+
+        return $results;
     }
 
     /**
@@ -133,7 +129,7 @@ class MessageController extends Controller
     }
 
     /**
-     * @Rest\View(serializerGroups={"messages"})
+     * @Rest\View()
      * @Rest\Patch("/message/{id}")
      */
     public function patchMessageAction(Request $request)

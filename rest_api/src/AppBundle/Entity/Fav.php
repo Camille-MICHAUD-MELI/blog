@@ -14,12 +14,10 @@ use JMS\Serializer\Annotation\Expose;
 /**
  * @ORM\Entity()
  * @ORM\Table(name="fav")
- * @ExclusionPolicy("all")
  */
 class Fav
 {
     /**
-     * @Expose
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue
